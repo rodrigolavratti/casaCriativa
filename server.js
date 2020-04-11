@@ -31,6 +31,20 @@ const ideas = [
 		description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
 		url: "https://www.google.com/"
 	},
+	{
+		img: "https://image.flaticon.com/icons/svg/2781/2781045.svg",
+		title: "Negocios",
+		category: "Empresas",
+		description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+		url: "https://www.google.com/"
+	},
+	{
+		img: "https://image.flaticon.com/icons/svg/2781/2781031.svg",
+		title: "Cartões",
+		category: "Investimentos",
+		description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+		url: "https://www.google.com/"
+	},
 ]
 
 //Configurar arquivos estaticos (css, js, imagens)
@@ -47,8 +61,10 @@ nunjucks.configure("views", {
 // e capturo o pedido do cliente para responder
 server.get("/", function(req, res) {
 
+	const reversedIdeas = [...ideas].reverse()
+
 	let lastIdeas = []
-	for (let idea of ideas.reverse()) {
+	for (let idea of reversedIdeas) {
 		if (lastIdeas.length < 3) {
 			lastIdeas.push(idea)
 		}
@@ -58,7 +74,10 @@ server.get("/", function(req, res) {
 })
 
 server.get("/ideias", function(req, res) {
-	return res.render("ideias.html")
+
+	const reversedIdeas = [...ideas].reverse()
+
+	return res.render("ideias.html", { ideas: reversedIdeas })
 })
 
 // liguei meu servidor na porat 3000
